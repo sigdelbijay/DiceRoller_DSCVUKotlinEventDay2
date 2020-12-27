@@ -5,19 +5,18 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    //initialize diceHistory and adapter
+    //initialise mutable diceHistoryList and adapter
     private val diceHistoryList : MutableList<Int> = mutableListOf()
     private val adapter = MainAdapter(diceHistoryList)
 
+    //onCreate is a lifecycle callback. When MainActivity starts, it is the first lifecycle method called
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
 
         //button and click functionality
         val rollButton: Button = findViewById(R.id.button)
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         rollDice()
 
         //recycler view setting
-        //val recyDiceHistory: RecyclerView = findViewById(R.id.recyDiceHistory)
+        //val recyDiceHistory: RecyclerView = findViewById(R.id.recyDiceHistory) //old way of referencing views/viewgroups in XML layout
         recyDiceHistory.layoutManager = LinearLayoutManager(this)
         recyDiceHistory.adapter = adapter
     }
@@ -36,6 +35,8 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
         val diceRoll = dice.roll()
         val diceImage: ImageView = findViewById(R.id.imageView)
+
+        //selects image from res/drawable folder based on the dice rolled from 1..6
         val drawableResource = when(diceRoll) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
@@ -46,17 +47,15 @@ class MainActivity : AppCompatActivity() {
         }
         diceImage.setImageResource(drawableResource)
 
-        //update dice history
+        //update dice diceHistoryList
         diceHistoryList.add(diceRoll)
 
-        //notify adapter
+        //notify adapter about data being added to diceHistoryList
         adapter.notifyDataSetChanged()
     }
-
-
 }
 
-
+//dice class that has roll function which returns random number between 1 and 6
 class Dice(val numSides: Int) {
     fun roll(): Int {
         return (1..numSides).random()
