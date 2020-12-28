@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    //initialise mutable diceHistoryList and adapter
+    //initialise mutable diceHistoryList and adapter *For implementing RecyclerView*
     private val diceHistoryList : MutableList<Int> = mutableListOf()
     private val adapter = MainAdapter(diceHistoryList)
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener{ rollDice() }
         rollDice()
 
-        //recycler view setting
+        //recycler view setting *For implementing RecyclerView*
         //val recyDiceHistory: RecyclerView = findViewById(R.id.recyDiceHistory) //old way of referencing views/viewgroups in XML layout
         recyDiceHistory.layoutManager = LinearLayoutManager(this)
         recyDiceHistory.adapter = adapter
@@ -47,10 +47,10 @@ class MainActivity : AppCompatActivity() {
         }
         diceImage.setImageResource(drawableResource)
 
-        //update dice diceHistoryList
+        //update dice diceHistoryList *For implementing RecyclerView*
         diceHistoryList.add(diceRoll)
 
-        //notify adapter about data being added to diceHistoryList
+        //notify adapter about data being added to diceHistoryList *For implementing RecyclerView*
         adapter.notifyDataSetChanged()
     }
 }

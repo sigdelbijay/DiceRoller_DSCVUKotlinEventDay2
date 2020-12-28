@@ -7,6 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_dice_history.view.*
 
+//*MainAdapter loads data to RecyclerView "recyDiceHistory" in MainActivity*
 class MainAdapter(var diceHistoryList: MutableList<Int>) : RecyclerView.Adapter<MainAdapter.MainViewHolder>(){
 
     //Viewholder for each item in the list
